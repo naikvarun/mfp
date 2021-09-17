@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - packages/container/**
 defaults:
   run: 
     working-directory: package/container
@@ -12,12 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: pwd
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
       - name: Checkout code
         uses: actions/checkout@v2
-      - run: pwd
+      
       - run: rm yarn.lock
       - name: Install Dependencies
         run: yarn install
