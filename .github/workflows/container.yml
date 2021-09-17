@@ -17,6 +17,8 @@ jobs:
           node-version: '16'
       - name: Checkout code
         uses: actions/checkout@v2
+      - run: pwd
+      - run: rm yarn.lock
       - name: Install Dependencies
         run: yarn install
       - name: Build 
