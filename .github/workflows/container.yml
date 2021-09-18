@@ -15,5 +15,9 @@ jobs:
           node-version: '16'
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: npm --version
-      - run: yarn --version
+        working-directory: package/container
+        run: yarn install
+      - name: build
+        working-directory: package/container
+        run: yarn build    
+        
