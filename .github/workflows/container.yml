@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - main
-defaults:
-  run: 
-    working-directory: package/container
+#defaults:
+#  run: 
+#    working-directory: package/container
 jobs:
   build:
     runs-on: ubuntu-latest
