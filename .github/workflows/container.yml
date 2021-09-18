@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - main
-#defaults:
-#  run: 
-#    working-directory: package/container
+defaults:
+  run: 
+    working-directory: packages/container
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,9 +15,7 @@ jobs:
           node-version: '16'
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        working-directory: package/container
         run: yarn install
       - name: build
-        working-directory: package/container
         run: yarn build    
         
