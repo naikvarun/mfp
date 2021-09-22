@@ -9,6 +9,8 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-2
     steps:
       - uses: actions/setup-node@v2
         with:
@@ -18,4 +20,12 @@ jobs:
         run: yarn install
       - name: build
         run: yarn build    
-        
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{env.AWS_REGION}}
+      - name: Copy files to the test website with the AWS CLI
+        run: |
+          aws s3 sync dist. s3://${{secrets.AWS_S3_BUCKET_NAME}}/container/latest
